@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/drawable-v23/round_background.xml" value="0.19" />
+        <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/drawable-v23/round_background_lg.xml" value="0.19" />
+        <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/drawable-v23/round_background_md.xml" value="0.19" />
+        <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/drawable/brush.xml" value="0.19" />
         <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/drawable/drawing_frame.xml" value="0.2515" />
-        <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/drawable/ic_asset_1.xml" value="0.19" />
+        <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/drawable/round_background.xml" value="0.19" />
+        <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Users/Timothy/AndroidStudioProjects/DrawingApp/app/src/main/res/layout/my_custom_dialog.xml" value="0.264" />
       </map>
     </option>
   </component>
