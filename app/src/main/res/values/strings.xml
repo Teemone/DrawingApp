@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Drawing App</string>
     <string name="change_brush_size">Change brush size</string>
+    <string name="color_chooser_item">Color chooser item</string>
+    <string name="red">red</string>
+    <string name="black">black</string>
+    <string name="white">white</string>
+    <string name="pink">pink</string>
+    <string name="orange">orange</string>
+    <string name="teal">teal</string>
 </resources>
