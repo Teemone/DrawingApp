@@ -69,8 +69,6 @@ class MainActivity : AppCompatActivity() {
         drawingView = findViewById(R.id.drawingView)
         drawingView.setBrushSize(10f)
 
-        binding.ibBrushSize.setOnClickListener { changeBrushSizeDialog() }
-
         llColorChooser = binding.llColorChooser
         var selected = llColorChooser[0] as ImageButton
         selected.setImageResource(R.drawable.selected)
@@ -92,7 +90,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.ibBrushSize.setOnClickListener { changeBrushSizeDialog() }
         binding.ibGallery.setOnClickListener { handleResultLauncher() }
+        binding.ibRedo.setOnClickListener { drawingView.redo() }
+        binding.ibUndo.setOnClickListener { drawingView.undo() }
 
     }
 

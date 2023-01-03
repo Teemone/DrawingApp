@@ -115,7 +115,19 @@ class DrawingView(context: Context, attrs: AttributeSet) :
         drawPaint!!.color = color
     }
 
+    fun undo(){
+        if(paths.size > 0){
+            undoPaths.add(paths.removeAt(paths.size-1))
+            invalidate()
+        }
+    }
 
+    fun redo(){
+        if (undoPaths.size > 0){
+            paths.add(undoPaths.removeAt(undoPaths.size-1))
+            invalidate()
+        }
+    }
 
     internal inner class CustomPath(var color: Int, var brushThickness: Float) : Path() {
 
