@@ -9,25 +9,41 @@
     android:padding="5dp"
     tools:context=".MainActivity">
 
-    <com.example.drawingapp.DrawingView
-        android:id="@+id/drawingView"
+    <FrameLayout
+        android:id="@+id/fl_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@id/ll_color_chooser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image_of_students"
+            android:scaleType="centerCrop"
+            android:src="@drawable/students" />
+
+
+        <com.example.drawingapp.DrawingView
+            android:id="@+id/drawingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#33FFFFFF" />
+    </FrameLayout>
+
 
     <LinearLayout
         android:id="@+id/ll_color_chooser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/ib_brush_size"
+        app:layout_constraintBottom_toTopOf="@+id/ll_btns"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/drawingView"
+        app:layout_constraintTop_toBottomOf="@id/fl_background"
         tools:layout_editor_absoluteX="5dp">
 
         <ImageButton
@@ -87,16 +103,36 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/ib_brush_size"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_btns"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/change_brush_size"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:src="@drawable/brush"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_color_chooser">
+
+        <ImageButton
+            android:id="@+id/ib_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:background="@drawable/gallery"
+            android:contentDescription="@string/change_brush_size"
+            android:maxWidth="48dp"
+            android:maxHeight="48dp" />
+
+        <ImageButton
+            android:id="@+id/ib_brush_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:contentDescription="@string/change_brush_size"
+            android:maxWidth="48dp"
+            android:maxHeight="48dp"
+            android:src="@drawable/brush" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
