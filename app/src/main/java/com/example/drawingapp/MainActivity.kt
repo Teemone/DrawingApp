@@ -54,12 +54,6 @@ class MainActivity : AppCompatActivity() {
                     val toGallery =
                         Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     galleryResultLauncher.launch(toGallery)
-                } else {
-                }
-            } else {
-                if (permName == Manifest.permission.READ_EXTERNAL_STORAGE) {
-
-                } else {
                 }
             }
 
@@ -112,17 +106,11 @@ class MainActivity : AppCompatActivity() {
         binding.ibCustom.setOnClickListener { onCustomColorClicked() }
         binding.ibBrushSize.setOnClickListener { changeBrushSizeDialog() }
         binding.ibGallery.setOnClickListener { handleResultLauncher() }
-        binding.ibGallery.setOnLongClickListener {
-            loadingDialog()
-            lifecycleScope.launch {
-                doSomething()
-            }
-            true
-        }
         binding.ibRedo.setOnClickListener { drawingView.redo() }
         binding.ibUndo.setOnClickListener { drawingView.undo() }
         binding.ibDownload.setOnClickListener {
             if (isReadPermGranted()) {
+                loadingDialog()
                 lifecycleScope.launch { saveBitmap(getBitmapFromView(binding.flBackground)) }
             }
         }
@@ -212,18 +200,6 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    private suspend fun doSomething() {
-        withContext(Dispatchers.IO) {
-            for (i in 1..1000000) {
-                Log.i("COUNT", i.toString())
-            }
-            runOnUiThread {
-                dismissDialog()
-                Toast.makeText(applicationContext, "Completed count!", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     private fun loadingDialog() {
         dial = Dialog(this)
         dial.setContentView(R.layout.loading)
@@ -272,6 +248,7 @@ class MainActivity : AppCompatActivity() {
 
                     result = fileLocation.absolutePath
                     runOnUiThread {
+                        dismissDialog()
                         if (result.isNotEmpty()) {
                             Toast.makeText(
                                 applicationContext, result, Toast.LENGTH_LONG
