@@ -9,4 +9,6 @@
     <string name="orange">orange</string>
     <string name="teal">teal</string>
     <string name="image_of_students">image of students</string>
+    <string name="please_wait">please wait..</string>
+    <string name="download">download</string>
 </resources>
