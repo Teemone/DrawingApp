@@ -120,7 +120,11 @@ class MainActivity : AppCompatActivity() {
         }
         binding.ibRedo.setOnClickListener { drawingView.redo() }
         binding.ibUndo.setOnClickListener { drawingView.undo() }
-
+        binding.ibDownload.setOnClickListener {
+            if (isReadPermGranted()) {
+                lifecycleScope.launch { saveBitmap(getBitmapFromView(binding.flBackground)) }
+            }
+        }
 
     }
 
@@ -238,6 +242,52 @@ class MainActivity : AppCompatActivity() {
         return returnBitmap
     }
 
+    private suspend fun saveBitmap(bitmap: Bitmap?): String {
+        var result = ""
+
+        withContext(Dispatchers.IO) {
+            bitmap?.let {
+                try {
+                    val baos = ByteArrayOutputStream()
+                    it.compress(Bitmap.CompressFormat.PNG, 90, baos)
+
+                    val fileLocation = File(
+                        "${externalCacheDir?.absoluteFile.toString()}${
+                            File.separator
+                        }KidsDrawingApp_${System.currentTimeMillis() / 1000}.png"
+                    )
+                    val fileOutStream = FileOutputStream(fileLocation)
+                    fileOutStream.write(baos.toByteArray())
+                    fileOutStream.close()
+
+                    result = fileLocation.absolutePath
+                    runOnUiThread {
+                        if (result.isNotEmpty()) {
+                            Toast.makeText(
+                                applicationContext, result, Toast.LENGTH_LONG
+                            ).show()
+                        } else
+                            Toast.makeText(
+                                applicationContext,
+                                "An error occurred while saving file", Toast.LENGTH_LONG
+                            ).show()
+                    }
+                } catch (e: Exception) {
+                    result = ""
+                    e.printStackTrace()
+                }
+            }
+        }
+        return result
+    }
+
+    private fun isReadPermGranted(): Boolean {
+        val confirm = ContextCompat.checkSelfPermission(
+            applicationContext,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+        return confirm == PackageManager.PERMISSION_GRANTED
+    }
 
 
 }
