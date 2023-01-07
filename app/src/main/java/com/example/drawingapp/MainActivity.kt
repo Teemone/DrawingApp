@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawingView: DrawingView
     private lateinit var llColorChooser: LinearLayout
     private lateinit var dial: Dialog
+    private lateinit var selected: ImageButton
 
     private val resultLauncher: ActivityResultLauncher<Array<String>> = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         drawingView.setBrushSize(10f)
 
         llColorChooser = binding.llColorChooser
-        var selected = llColorChooser[0] as ImageButton
+        selected = llColorChooser[0] as ImageButton
         selected.setImageResource(R.drawable.selected)
 
         /**
@@ -108,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
-        binding.btnCustom.setOnClickListener { onCustomColorClicked() }
+        binding.ibCustom.setOnClickListener { onCustomColorClicked() }
         binding.ibBrushSize.setOnClickListener { changeBrushSizeDialog() }
         binding.ibGallery.setOnClickListener { handleResultLauncher() }
         binding.ibGallery.setOnLongClickListener {
@@ -129,15 +130,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onCustomColorClicked() {
+        if(selected != binding.ibCustom){
+            selected.setImageResource(R.drawable.unselected)
+            selected = binding.ibCustom
+        }
+
+        selected.setImageResource(R.drawable.selected)
+
         AmbilWarnaDialog(this, Color.BLACK, object : OnAmbilWarnaListener {
 
             override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
-                drawingView.setColor(color.toString())
+                drawingView.setColor(color)
+                binding.ibCustom.setBackgroundColor(color)
             }
 
             override fun onCancel(dialog: AmbilWarnaDialog?) {
             }
         }).show()
+
     }
 
     //    Displays a dialog that allows the user to select the stroke / brush size

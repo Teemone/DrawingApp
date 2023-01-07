@@ -115,6 +115,11 @@ class DrawingView(context: Context, attrs: AttributeSet) :
         drawPaint!!.color = color
     }
 
+    fun setColor(color: Int){
+        this.color = color
+        drawPaint!!.color = this.color
+    }
+
     fun undo(){
         if(paths.size > 0){
             undoPaths.add(paths.removeAt(paths.size-1))
