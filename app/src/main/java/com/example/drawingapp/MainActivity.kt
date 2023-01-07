@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -18,6 +19,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.iterator
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +28,11 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import yuku.ambilwarna.AmbilWarnaDialog
+import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -72,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         drawingView = findViewById(R.id.drawingView)
         drawingView.setBrushSize(10f)
 
@@ -79,9 +87,10 @@ class MainActivity : AppCompatActivity() {
         var selected = llColorChooser[0] as ImageButton
         selected.setImageResource(R.drawable.selected)
 
-
-//        iterates through the views in the LinearLayout
-//        and applies an onClick and onLongClick Listeners to them
+        /**
+         * iterates through the views in the LinearLayout
+         * and applies an onClick and onLongClick Listeners to them
+         */
         for (i in llColorChooser) {
             (i as ImageButton).setOnClickListener {
                 drawingView.setColor(i.tag.toString())
@@ -99,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
         }
-
+        binding.btnCustom.setOnClickListener { onCustomColorClicked() }
         binding.ibBrushSize.setOnClickListener { changeBrushSizeDialog() }
         binding.ibGallery.setOnClickListener { handleResultLauncher() }
         binding.ibGallery.setOnLongClickListener {
@@ -112,6 +121,19 @@ class MainActivity : AppCompatActivity() {
         binding.ibRedo.setOnClickListener { drawingView.redo() }
         binding.ibUndo.setOnClickListener { drawingView.undo() }
 
+
+    }
+
+    private fun onCustomColorClicked() {
+        AmbilWarnaDialog(this, Color.BLACK, object : OnAmbilWarnaListener {
+
+            override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
+                drawingView.setColor(color.toString())
+            }
+
+            override fun onCancel(dialog: AmbilWarnaDialog?) {
+            }
+        }).show()
     }
 
     //    Displays a dialog that allows the user to select the stroke / brush size
@@ -176,9 +198,9 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    private suspend fun doSomething(){
-        withContext(Dispatchers.IO){
-            for (i in 1..1000000){
+    private suspend fun doSomething() {
+        withContext(Dispatchers.IO) {
+            for (i in 1..1000000) {
                 Log.i("COUNT", i.toString())
             }
             runOnUiThread {
@@ -188,7 +210,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadingDialog(){
+    private fun loadingDialog() {
         dial = Dialog(this)
         dial.setContentView(R.layout.loading)
         dial.setCancelable(false)
@@ -201,19 +223,21 @@ class MainActivity : AppCompatActivity() {
     private fun snackBar(text: String) =
         Snackbar.make(binding.parent, text, Snackbar.LENGTH_SHORT).show()
 
-    private fun getBitmapFromView(v: View): Bitmap{
+    private fun
+            getBitmapFromView(v: View): Bitmap {
         val returnBitmap = Bitmap.createBitmap(v.width, v.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(returnBitmap)
         val background = v.background
 
-        if (background != null){
+        if (background != null) {
             background.draw(canvas)
-        }else{
+        } else {
             canvas.drawColor(Color.WHITE)
         }
         v.draw(canvas)
         return returnBitmap
     }
+
 
 
 }

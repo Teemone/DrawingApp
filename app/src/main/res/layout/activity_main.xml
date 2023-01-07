@@ -22,9 +22,10 @@
             android:id="@+id/iv_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:contentDescription="@string/image_of_students"
             android:scaleType="centerCrop"
-            android:src="@drawable/students" />
+            tools:src="@drawable/students" />
 
 
         <com.example.drawingapp.DrawingView
@@ -37,69 +38,95 @@
 
     <LinearLayout
         android:id="@+id/ll_color_chooser"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/ll_btns"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ll_custom_color"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fl_background"
-        tools:layout_editor_absoluteX="5dp">
+        app:layout_constraintTop_toBottomOf="@id/fl_background">
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="@color/black"
             android:contentDescription="@string/black"
             android:src="@drawable/unselected"
-            android:tag="@color/black" />
+            android:tag="@color/black"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="@color/white"
             android:contentDescription="@string/white"
             android:src="@drawable/unselected"
-            android:tag="@color/white" />
+            android:tag="@color/white"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="@color/pink"
             android:contentDescription="@string/pink"
             android:src="@drawable/unselected"
-            android:tag="@color/pink" />
+            android:tag="@color/pink"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="@color/orange"
             android:contentDescription="@string/orange"
             android:src="@drawable/unselected"
-            android:tag="@color/orange" />
+            android:tag="@color/orange"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="@color/red"
             android:contentDescription="@string/red"
             android:src="@drawable/unselected"
-            android:tag="@color/red" />
+            android:tag="@color/red"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_margin="2dp"
             android:background="@color/teal"
             android:contentDescription="@string/teal"
             android:src="@drawable/unselected"
-            android:tag="@color/teal" />
+            android:tag="@color/teal"
+            tools:ignore="TouchTargetSizeCheck" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_custom_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/ll_color_chooser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ll_color_chooser"
+        app:layout_constraintTop_toTopOf="@id/ll_color_chooser">
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="2dp"
+            android:id="@+id/btn_custom"
+            android:background="@drawable/custom_color"
+            android:contentDescription="@string/random"
+            android:src="@drawable/unselected"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 
@@ -118,39 +145,39 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="2dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:src="@drawable/ic_gallery"
             android:contentDescription="@string/change_brush_size"
-            android:minHeight="48dp"
-            android:minWidth="48dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:maxWidth="48dp"
-            android:maxHeight="48dp" />
+            android:maxHeight="48dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_gallery" />
 
         <ImageButton
             android:id="@+id/ib_undo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:src="@drawable/ic_undo"
             android:contentDescription="@string/change_brush_size"
-            android:minHeight="48dp"
-            android:minWidth="48dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:maxWidth="48dp"
-            android:maxHeight="48dp" />
+            android:maxHeight="48dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_undo" />
 
         <ImageButton
             android:id="@+id/ib_redo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:src="@drawable/ic_redo"
             android:contentDescription="@string/change_brush_size"
-            android:minHeight="48dp"
-            android:minWidth="48dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:maxWidth="48dp"
-            android:maxHeight="48dp"  />
+            android:maxHeight="48dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_redo" />
 
         <ImageButton
             android:id="@+id/ib_brush_size"
@@ -158,10 +185,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:contentDescription="@string/change_brush_size"
-            android:minHeight="48dp"
-            android:minWidth="48dp"
             android:maxWidth="48dp"
             android:maxHeight="48dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             android:src="@drawable/brush" />
 
         <ImageButton
@@ -170,10 +197,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:contentDescription="@string/download"
-            android:minHeight="48dp"
-            android:minWidth="48dp"
             android:maxWidth="48dp"
             android:maxHeight="48dp"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             android:src="@drawable/ic_download" />
     </LinearLayout>
 
