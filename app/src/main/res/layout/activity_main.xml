@@ -163,6 +163,18 @@
             android:maxWidth="48dp"
             android:maxHeight="48dp"
             android:src="@drawable/brush" />
+
+        <ImageButton
+            android:id="@+id/ib_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:contentDescription="@string/download"
+            android:minHeight="48dp"
+            android:minWidth="48dp"
+            android:maxWidth="48dp"
+            android:maxHeight="48dp"
+            android:src="@drawable/ic_download" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
