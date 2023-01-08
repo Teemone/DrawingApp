@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -253,6 +254,7 @@ class MainActivity : AppCompatActivity() {
                             Toast.makeText(
                                 applicationContext, result, Toast.LENGTH_LONG
                             ).show()
+                            share(result)
                         } else
                             Toast.makeText(
                                 applicationContext,
@@ -274,6 +276,20 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.READ_EXTERNAL_STORAGE
         )
         return confirm == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun share(str: String){
+        MediaScannerConnection.scanFile(
+            this,
+            arrayOf(str),
+            null
+        ){
+            path, uri ->
+            val intentShare = Intent(Intent.ACTION_SEND)
+            intentShare.putExtra(Intent.EXTRA_STREAM, uri)
+            intentShare.type = "image/png"
+            startActivity(Intent.createChooser(intentShare, "Share"))
+        }
     }
 
 
